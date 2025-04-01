@@ -4,6 +4,7 @@ from typing import Dict, List, Optional
 from services.fmcsa import FMCSAService
 from services.load import LoadService
 from services.verification import VerificationService
+from services.test import router as test_router
 import urllib.parse
 from starlette.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
@@ -22,6 +23,9 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Include the test router
+app.include_router(test_router)
 
 # Initialize services
 fmcsa_service = FMCSAService()
